@@ -5,9 +5,9 @@
 				<div class="title">To-do List</div>
 				<div class="todo-add">
 					<input type="text" class="todo-input" placeholder="New Todo" v-model="todo">
-					<button class="add-btn" @click="todoSet(todo)"> Add </button>
+					<button class="add-btn" @click="dataSet(todo)"> Add </button>
 				</div>
-				<ul class="ul-st">
+				<ul class="ul-st" @scroll="scrollEvent">
 					<todolist-table v-for="row in rows" :key="row" :row="row"></todolist-table>
 				</ul>
 			</div>
@@ -21,23 +21,33 @@ export default {
 	data() {
 		return{
 			todo: '',
-			rows: []
+			rows: [],
+			item: 15,
 		}
 	},
 	methods: {
-		async todoGet(url) {
-			const { data } = await this.$axios.get('/'+url);
+		async dataGet() {
+			const url = '/todo/?items=' + this.item;
+			const { data } = await this.$axios.get(url);
 
 			this.rows = data;
 		},
-		async todoSet(data) {
+		async dataSet(data) {
 			await this.$axios.post('/todo', {
 				data
 			});
 		},
+		scrollEvent(e) {
+			const { scrollTop, clientHeight, scrollHeight } = e.target;
+
+			if( scrollTop == (scrollHeight - clientHeight) ) {
+				this.item = this.item + 10;
+				this.dataGet();
+			}
+		}
 	},
 	created() {
-		this.todoGet('todo');
+		this.dataGet();
 	},
 };
 </script>

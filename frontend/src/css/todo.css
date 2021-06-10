@@ -6,7 +6,7 @@ input[type="checkbox"] + label {
 	cursor: pointer;
     width: 15px;
     height: 15px;
-    border: 1px solid #95bbff;
+    border: 2px solid #95bbff;
     border-radius: 3px;
 	position: relative;
 	top: 3px;
@@ -22,13 +22,7 @@ input[type="checkbox"]:checked + label .checkmark {
   position: absolute;
 }
 
-.todo {
-	width: 100vw;
-	height: 100vh;
-}
-
 .todo-list {
-	height: 100vh;
 	text-align: center;
 }
 
@@ -36,7 +30,7 @@ input[type="checkbox"]:checked + label .checkmark {
 	border: 1px solid #e2e2e2;
     width: 40vw;
     height: 70vh;
-    margin: 10vh auto;
+    margin: 9vh auto;
 	box-shadow: 0px 15px 15px 15px #e0e0e0;
 	padding: 50px;
 }
@@ -72,9 +66,10 @@ input[type="checkbox"]:checked + label .checkmark {
 
 .ul-st {
 	list-style: none;
-	padding-left: 20px;
+	padding-left: 15px;
 	height: 400px; 
 	overflow: auto;
+	margin: 30px 0 0 0;
 }
 
 .li-st {
@@ -83,4 +78,38 @@ input[type="checkbox"]:checked + label .checkmark {
 
 .li-st label {
 	float: left;
+}
+
+.loading-bar{
+	width: 100px;
+	height: 100px;
+	border: 3px inset;
+	border-radius: 60px;
+	animation-duration: 3s;
+	animation-name: loading-bar;
+	animation-iteration-count: infinite;
+	transform: rotate(-45deg);
+}
+
+@keyframes loading-bar {
+	to {
+		transform: rotate(315deg);
+	}
+}
+
+.ul-st::-webkit-scrollbar {
+	width: 13px;
+}
+
+.ul-st::-webkit-scrollbar-thumb {
+	background-color: #95bbff;
+	border-radius: 10px;
+	background-clip: padding-box;
+	border: 2px solid transparent;
+}
+
+.ul-st::-webkit-scrollbar-track {
+	background-color: #dadada;
+	border-radius: 10px;
+	box-shadow: inset 0px 0px 5px white;
 }

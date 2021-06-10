@@ -4,9 +4,10 @@ var database = require('./modules/mysql');
 var mysql = new database();
 
 router.get('/', async function(req, res, next) {
+	const items = req.query.items;
 	mysql.open();
 
-	const sql = 'SELECT * FROM data.web_todo_list_tbl;';
+	const sql = `SELECT * FROM data.web_todo_list_tbl LIMIT ${items};`;
 	const rs = await mysql.query(sql);
 
 	res.send(JSON.stringify(rs));
