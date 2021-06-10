@@ -70,6 +70,17 @@ input[type="checkbox"]:checked + label .checkmark {
     border-bottom: 1px solid #dedede;
 }
 
-.tb {
-	margin: auto;
+.ul-st {
+	list-style: none;
+	padding-left: 20px;
+	height: 400px; 
+	overflow: auto;
+}
+
+.li-st {
+	margin-bottom: 10px;
+}
+
+.li-st label {
+	float: left;
 }
