@@ -27,7 +27,7 @@ export default {
 	},
 	methods: {
 		async dataGet() {
-			const url = '/todo/?items=' + this.item;
+			const url = '/todo?items=' + this.item;
 			const { data } = await this.$axios.get(url);
 
 			this.rows = data;

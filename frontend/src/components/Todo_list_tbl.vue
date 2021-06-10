@@ -1,11 +1,11 @@
 <template>
 	<li class="li-st">
-		<input type="checkbox" 
-			   :id="'todo-chk'+row.idx" 
-			   v-model="row.checked" 
-			   true-value=1 
-			   false-value=0 
-			   @change="todoSet(row)">
+		<input type="checkbox"
+			   :id="'todo-chk'+row.idx"
+			   v-model="row.checked"
+			   true-value=1
+			   false-value=0
+			   @change="dataSet(row)">
 		<label :for="'todo-chk'+row.idx">
 			<span :class="row.checked == 1 ? 'checkmark' : ''"></span>
 		</label>
@@ -20,7 +20,7 @@ export default {
 		row: Object,
 	},
 	methods: {
-		async todoSet(url, data) {
+		async dataSet(data) {
 			await this.$axios.post('/todo/checkup', {
 				data
 			});
