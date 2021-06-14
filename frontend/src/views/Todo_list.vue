@@ -4,7 +4,11 @@
 			<div class="list-box">
 				<div class="title">To-do List</div>
 				<div class="todo-add">
-					<input type="text" class="todo-input" placeholder="New Todo" v-model="todo">
+					<input type="text"
+						   class="todo-input"
+						   placeholder="New Todo"
+						   v-model="todo"
+						   @keyup.enter="dataPut(todo)">
 					<button class="add-btn" @click="dataPut(todo)"> Add </button>
 				</div>
 				<ul class="ul-st" @scroll="scrollEvent">
@@ -45,6 +49,11 @@ export default {
 			this.rows.splice(idx, 1);
 		},
 		async dataPut(data) {
+			if ( data === "" ) {
+				alert("Todo 내용을 입력해주세요.");
+				return;
+			}
+
 			await this.$axios.put('/todo', {
 				data
 			});
@@ -55,7 +64,7 @@ export default {
 		scrollEvent(e) {
 			const { scrollTop, clientHeight, scrollHeight } = e.target;
 
-			if( scrollTop == (scrollHeight - clientHeight) ) {
+			if ( scrollTop == (scrollHeight - clientHeight) ) {
 				this.item = this.item + 10;
 				this.dataGet();
 			}
