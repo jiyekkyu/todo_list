@@ -5,10 +5,14 @@
 				<div class="title">To-do List</div>
 				<div class="todo-add">
 					<input type="text" class="todo-input" placeholder="New Todo" v-model="todo">
-					<button class="add-btn" @click="dataSet(todo)"> Add </button>
+					<button class="add-btn" @click="dataPut(todo)"> Add </button>
 				</div>
 				<ul class="ul-st" @scroll="scrollEvent">
-					<todolist-table v-for="row in rows" :key="row" :row="row"></todolist-table>
+					<todolist-table
+						v-for="row in rows"
+						:key="'row'"
+						:row="row"
+						@remove="dataDel"></todolist-table>
 				</ul>
 			</div>
 		</section>
@@ -32,10 +36,21 @@ export default {
 
 			this.rows = data;
 		},
-		async dataSet(data) {
-			await this.$axios.post('/todo', {
+		async dataDel(row) {
+			const idx = this.rows.findIndex((r) => r.idx === row.idx);
+			if ( !idx === -1 ) {
+				return;
+			}
+			await this.$axios.delete('/todo?idx='+row.idx);
+			this.rows.splice(idx, 1);
+		},
+		async dataPut(data) {
+			await this.$axios.put('/todo', {
 				data
 			});
+
+			this.todo = '';
+			this.dataGet();
 		},
 		scrollEvent(e) {
 			const { scrollTop, clientHeight, scrollHeight } = e.target;

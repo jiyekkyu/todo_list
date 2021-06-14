@@ -5,11 +5,16 @@
 			   v-model="row.checked"
 			   true-value=1
 			   false-value=0
-			   @change="dataSet(row)">
+			   @change="dataPost(row)">
 		<label :for="'todo-chk'+row.idx">
 			<span :class="row.checked == 1 ? 'checkmark' : ''"></span>
 		</label>
-		{{row.todo}}
+		<span class="todo-span">{{row.todo}}</span>
+		<button
+			class="del-btn"
+			:idx="row.idx"
+			:value="row.idx"
+			@click="$emit('remove', row)">X</button>
 	</li>
 </template>
 
@@ -20,8 +25,8 @@ export default {
 		row: Object,
 	},
 	methods: {
-		async dataSet(data) {
-			await this.$axios.post('/todo/checkup', {
+		async dataPost(data) {
+			await this.$axios.post('/todo', {
 				data
 			});
 		},

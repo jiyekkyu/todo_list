@@ -113,3 +113,15 @@ input[type="checkbox"]:checked + label .checkmark {
 	border-radius: 10px;
 	box-shadow: inset 0px 0px 5px white;
 }
+
+.todo-span {
+	display: inline-block;
+	width: 90%;
+}
+
+.del-btn {
+	border: none;
+	background-color: white;
+	cursor: pointer;
+	font-size: 20px;
+}

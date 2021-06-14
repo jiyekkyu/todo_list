@@ -7,7 +7,7 @@ router.get('/', async function(req, res, next) {
 	const items = req.query.items;
 	mysql.open();
 
-	const sql = `SELECT * FROM data.web_todo_list_tbl LIMIT ${items};`;
+	const sql = `SELECT * FROM web_todo_list_tbl LIMIT ${items};`;
 	const rs = await mysql.query(sql);
 
 	res.send(JSON.stringify(rs));
@@ -16,7 +16,7 @@ router.get('/', async function(req, res, next) {
 	mysql.close();
 });
 
-router.post('/', async function(req, res, next) {
+router.put('/', async function(req, res, next) {
 	const data = req.body.data;
 	mysql.open();
 
@@ -29,12 +29,24 @@ router.post('/', async function(req, res, next) {
 	mysql.close();
 });
 
-router.post('/checkUp', async function(req, res, next) {
+router.post('/', async function(req, res, next) {
 	const data = req.body.data;
 	mysql.open();
 
 	const sql = `UPDATE web_todo_list_tbl SET checked=${data.checked} WHERE idx=${data.idx};`;
-	console.log(data)
+	const rs = await mysql.query(sql);
+
+	res.send(JSON.stringify(rs));
+	res.end();
+
+	mysql.close();
+});
+
+router.delete('/', async function(req, res, next) {
+	const data = req.query.idx;
+	mysql.open();
+
+	const sql = `DELETE FROM web_todo_list_tbl WHERE idx=${data}`;
 	const rs = await mysql.query(sql);
 
 	res.send(JSON.stringify(rs));
