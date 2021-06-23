@@ -5,9 +5,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 var mysql      = require('mysql');
-var dbconfig   = require('./config/database.js');
 const cors = require('cors');
-var connection = mysql.createConnection(dbconfig);
 
 var todoRouter = require('./router/todo');
 
