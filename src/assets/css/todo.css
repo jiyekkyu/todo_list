@@ -41,7 +41,7 @@ input[type="checkbox"]:checked + label + span {
 
 .list-box {
 	border: 1px solid #e2e2e2;
-    width: 45vw;
+    width: 864px;
     height: 81vh;
     margin: 9vh auto;
 	box-shadow: 0px 15px 15px 15px #e0e0e0;
