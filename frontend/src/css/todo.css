@@ -55,7 +55,7 @@ input[type="checkbox"]:checked + label + span {
 .add-btn {
 	border: 1px solid #95bbff;
 	border-radius: 3px;
-	width: 10%;
+	width: 78px;
 	height: 35px;
 	background-color: #95bbff;
 	color: #fff;
