@@ -3,7 +3,7 @@ import axios from 'axios';
 import App from "@/App.vue";
 import router from "@/router";
 import todolist from "@/components/Todo_list_tbl"
-import "@/css/todo.css";
+import "@/assets/css/todo.css";
 
 const app = createApp(App).use(router);
 
