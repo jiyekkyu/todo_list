@@ -61,6 +61,7 @@ input[type="checkbox"]:checked + label + span {
 	height: 30px;
 	border: 1px solid #95bbff;
 	border-radius: 3px;
+	display: inline;
 }
 
 .add-btn {
@@ -72,6 +73,7 @@ input[type="checkbox"]:checked + label + span {
 	color: #fff;
 	font-size: 16px;
 	cursor: pointer;
+	display: inline;
 }
 
 .title {
