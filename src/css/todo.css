@@ -1,3 +1,11 @@
+body {
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
 input[type="checkbox"] {
 	display: none;
 }
@@ -10,6 +18,7 @@ input[type="checkbox"] + label {
 	border-radius: 3px;
 	position: relative;
 	top: 3px;
+	margin-left: 15px;
 }
 input[type="checkbox"]:checked + label .checkmark {
 	left: 4px;
@@ -38,9 +47,12 @@ input[type="checkbox"]:checked + label + span {
     margin: 9vh auto;
 	box-shadow: 0px 15px 15px 15px #e0e0e0;
 	padding: 50px;
+	overflow-x: auto;
+	overflow-y: hidden;
 }
 
 .todo-add {
+	width: 768px;
 	padding: 20px 0px 20px 0px;
     border-bottom: 1px solid #dedede;
 }
@@ -60,21 +72,24 @@ input[type="checkbox"]:checked + label + span {
 	background-color: #95bbff;
 	color: #fff;
 	font-size: 16px;
+	cursor: pointer;
 }
 
 .title {
+	width: 768px;
 	font-size: 50px;
-	padding: 20px;
+	padding: 20px 0 20px 0;
 	font-weight: 500;
     border-bottom: 1px solid #dedede;
 }
 
 .ul-st {
 	list-style: none;
-	padding-left: 15px;
-	height: 400px; 
+	width: 768px;
+	height: 400px;
 	overflow: auto;
 	margin: 30px 0 0 0;
+	padding: 0;
 }
 
 .li-st {

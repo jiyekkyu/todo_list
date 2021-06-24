@@ -75,4 +75,3 @@ export default {
 	},
 };
 </script>
-<style src="@/css/todo.css"></style>
