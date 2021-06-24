@@ -57,7 +57,7 @@ input[type="checkbox"]:checked + label + span {
 }
 
 .todo-input {
-	width: 89%;
+	width: 88%;
 	height: 30px;
 	border: 1px solid #95bbff;
 	border-radius: 3px;
@@ -66,7 +66,7 @@ input[type="checkbox"]:checked + label + span {
 .add-btn {
 	border: 1px solid #95bbff;
 	border-radius: 3px;
-	width: 78px;
+	width: 11%;
 	height: 35px;
 	background-color: #95bbff;
 	color: #fff;
