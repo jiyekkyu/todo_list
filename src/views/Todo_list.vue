@@ -8,15 +8,18 @@
 						   class="todo-input"
 						   placeholder="New Todo"
 						   v-model="todo"
-						   @keyup.enter="dataPut(todo)">
-					<button class="add-btn" @click="dataPut(todo)"> Add </button>
+						   @keyup.enter="todoSet">
+					<button class="add-btn" @click="todoSet"> Add </button>
 				</div>
 				<ul class="ul-st" @scroll="scrollEvent">
-					<todolist-table
-						v-for="row in rows"
-						:key="'row'"
-						:row="row"
-						@remove="dataDel"></todolist-table>
+					<todolist
+						v-for="(item, idx) in todos"
+						:key="idx"
+						:idx="idx"
+						:checked="item.checked"
+						:todo="item.todo"
+						@remove="todoDel"
+						@check="todoListChk"></todolist>
 				</ul>
 			</div>
 		</section>
@@ -24,54 +27,58 @@
 </template>
 
 <script>
+import todolist from '@/components/Todo_list_tbl';
 export default {
 	name: 'todo',
 	data() {
 		return{
 			todo: '',
-			rows: [],
-			item: 15,
+			checked: false,
+			todos: [],
 		}
 	},
+	components: {
+		todolist
+	},
 	methods: {
-		async dataGet() {
-			const url = '/todo?items=' + this.item;
-			const { data } = await this.$axios.get(url);
+		todoGet() {
+			const todo = JSON.parse(localStorage.getItem('todo'));
 
-			this.rows = data;
+			this.todos = todo ?? [];
 		},
-		async dataDel(row) {
-			const idx = this.rows.findIndex((r) => r.idx === row.idx);
-			if ( !idx === -1 ) {
-				return;
-			}
-			await this.$axios.delete('/todo?idx='+row.idx);
-			this.rows.splice(idx, 1);
+		todoListChk(data) {
+			const idx = data.idx;
+			const flag = data.flag;
+
+			this.todos[idx].checked = flag;
+
+			localStorage.todo = JSON.stringify(this.todos);
 		},
-		async dataPut(data) {
-			if ( data === "" ) {
+		todoDel(idx) {
+			this.todos.splice(idx, 1);
+
+			localStorage.todo = JSON.stringify(this.todos);
+		},
+		todoSet() {
+			const todo = this.todo;
+			const checked = this.checked;
+			const obj = {todo, checked};
+
+			if ( todo === "" ) {
 				alert("Todo 내용을 입력해주세요.");
 				return;
 			}
 
-			await this.$axios.put('/todo', {
-				data
-			});
+			this.todos.push(obj);
+
+			localStorage.todo = JSON.stringify(this.todos);
 
 			this.todo = '';
-			this.dataGet();
+			this.todoGet();
 		},
-		scrollEvent(e) {
-			const { scrollTop, clientHeight, scrollHeight } = e.target;
-
-			if ( scrollTop == (scrollHeight - clientHeight) ) {
-				this.item = this.item + 10;
-				this.dataGet();
-			}
-		}
 	},
 	created() {
-		this.dataGet();
+		this.todoGet();
 	},
 };
 </script>
